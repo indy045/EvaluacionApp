@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">EvaluacionApp</string>
+    <string name="txtnombre">Usuario</string>
+    <string name="txtpass">Contraseña</string>
+    <string name="btningresar">Ingresar</string>
+    <string name="btningresar1">Siguiente</string>
+    <string name="btningresar2">Obtener Información</string>
+    <string name="btningresar3">Añadir nombre</string>
+    <string name="etnombre2">Nombre</string>
+    <string name="rb1">Diurno</string>
+    <string name="rb2">Vespertino</string>
+    <string name="multitextview">Verificación de Información</string>
+    <string name="txtlista">Ingresa el estudiante</string>
+    <string name="txtasignatura">Nombre de Asignatura</string>
+    <string name="btnsiguiente">Siguiente</string>
+    <string name="btnlogin">Ingrese su Usuario</string>
+    <string name="btnfecha">Fecha</string>
+    <string name="btnhora">Hora</string>
+    <string name="title_activity_maps">MapsActivity</string>
+</resources>
