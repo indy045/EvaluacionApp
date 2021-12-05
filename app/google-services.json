@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "876522611753",
+    "project_id": "ingreso-de-estudiantes",
+    "storage_bucket": "ingreso-de-estudiantes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876522611753:android:81b1de8c6e6034d5126838",
+        "android_client_info": {
+          "package_name": "com.prueba.evaluacionapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876522611753-vjdbeis6oj1q9gath1roe5g43bpsq5ep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA09tcNlYXWHXY56bBGwN6zuxFBsa69BNU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "876522611753-vjdbeis6oj1q9gath1roe5g43bpsq5ep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

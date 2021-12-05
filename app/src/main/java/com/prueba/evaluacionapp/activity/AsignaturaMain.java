@@ -27,12 +27,14 @@ public class AsignaturaMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asignatura_main);
-
+        //instancia a la clase operacionescrud y entregamos los parametros de entrada
         OperacionesCRUD instancia = new OperacionesCRUD(this, "BDPROGRAMA", null, 2);
+
         String[] columnasAsignatura = Asignatura.Esquema.ALLCOLUMNAS;
         String condicion = "";
         String[] valCondicion = {};
 
+        //utilizamos el metodo contentvalues para ingresar los datos por clave y valor
         List<ContentValues> asignaturasObtenidas = instancia.obtenerDatos(columnasAsignatura, condicion,
                 valCondicion, Asignatura.Esquema.TABLE_ASIGNATURA);
 
@@ -64,7 +66,9 @@ public class AsignaturaMain extends AppCompatActivity {
             RecyclerView lista = findViewById(R.id.rv3);
             lista.setHasFixedSize(true);
 
+            //muestra en forma de lista
             manejador1 = new LinearLayoutManager(this);
+
             adaptador1 = new AdaptadorAsignatura(listaAsignatura);
             lista.setLayoutManager(manejador1);
             lista.setAdapter(adaptador1);
@@ -74,6 +78,10 @@ public class AsignaturaMain extends AppCompatActivity {
     }
     public void agregarasignatura(View view){
         Intent i = new Intent(AsignaturaMain.this, AsignaturaES.class);
+        startActivity(i);
+    }
+    public void calificacion(View view){
+        Intent i = new Intent(AsignaturaMain.this, CalificacionActivity.class);
         startActivity(i);
     }
 

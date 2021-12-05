@@ -22,6 +22,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EvaluacionApp">
         <activity
+            android:name=".activity.EditarCalificacion"
+            android:exported="true" />
+        <activity
+            android:name=".activity.CalificacionActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.CalificacionES"
+            android:exported="true" />
+        <activity
+            android:name=".activity.ActualizarEstudiantes"
+            android:exported="true" />
+        <activity
             android:name=".activity.AsignaturaMain"
             android:exported="true" />
         <activity
@@ -30,12 +42,8 @@
         <activity
             android:name=".activity.AsignaturaES"
             android:exported="true" />
-        <activity
-            android:name=".activity.ListaEstudianteAsignatura"
-            android:exported="true" />
-        <activity
-            android:name=".activity.Actualizarestudianteactivity"
-            android:exported="true" />
+
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

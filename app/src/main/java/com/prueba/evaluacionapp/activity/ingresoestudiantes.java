@@ -46,11 +46,14 @@ public class ingresoestudiantes extends AppCompatActivity {
     }
     //se crea el metodo insertar
     public void insert(View view) {
+
         //instacia a la clase operacionescrud /entregando los parametros de entrada
         OperacionesCRUD instancia = new OperacionesCRUD(this, "BDPROGRAMA", null, 2);
+
         //inicializar y generar mapeo de datos
         ContentValues datosusuario = new ContentValues();
-        //insertadmos los datos con el metodo put, clase, esquema, nombre de columnas
+
+        //insertamos los datos con el metodo put, clase, esquema, nombre de columnas
         datosusuario.put(Estudiante.Esquema.NOMBRE, etnombre.getText().toString());
         datosusuario.put(Estudiante.Esquema.APEPATERNO, etApellidoP.getText().toString());
         datosusuario.put(Estudiante.Esquema.APEMATERNO, etApellidoM.getText().toString());
@@ -66,6 +69,7 @@ public class ingresoestudiantes extends AppCompatActivity {
         }
 
         datosusuario.put(Estudiante.Esquema.TELEFONO, etcelular.getText().toString());
+
         //inicializamos en 0
         long id_user_insertado = 0;
 

@@ -15,6 +15,7 @@ import com.prueba.evaluacionapp.sqlite.OperacionesCRUD;
 import com.prueba.evaluacionapp.sqlite.esquema.Estudiante;
 
 public class ActualizarEstudiantes extends AppCompatActivity {
+
     EditText ednombre;
     EditText edapellidoP;
     EditText edapellidoM;
@@ -26,22 +27,24 @@ public class ActualizarEstudiantes extends AppCompatActivity {
     EditText edtelefono;
 
     int id_user_entrada = 0;
-    String edad_user_entrada= "";
-    String telefono_user_entrada= "";
-    String etnombre_user_entrada= "";
-    String etApellidoP_user_entrada= "";
-    String etApellidoM_user_entrada= "";
-    String etDireccion_user_entrada= "";
-    String etEmail_user_entrada="";
-    String etgenero_user_entrada= "";
+    String edad_user_entrada = "";
+    String telefono_user_entrada = "";
+    String etnombre_user_entrada = "";
+    String etApellidoP_user_entrada = "";
+    String etApellidoM_user_entrada = "";
+    String etDireccion_user_entrada = "";
+    String etEmail_user_entrada = "";
+    String etgenero_user_entrada = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_actualizar);
+        setContentView(R.layout.activity_actualizar_estudiantes);
 
-        if (null != this.getIntent()){
-            if(null !=this.getIntent().getExtras()){
+        //agregamos las varialbes para guardar los parametros q pasamos al adptador
+        //para obtener los parametros segun su clave
+        if (null != this.getIntent()) {
+            if (null != this.getIntent().getExtras()) {
                 Bundle parametrosEntrada = this.getIntent().getExtras();
                 id_user_entrada = parametrosEntrada.getInt("id");
                 edad_user_entrada = parametrosEntrada.getString("edad");
@@ -54,7 +57,7 @@ public class ActualizarEstudiantes extends AppCompatActivity {
                 etgenero_user_entrada = parametrosEntrada.getString("genero");
 
             }
-
+//obtenemos hacemos la conexion logica y grafica para obtener los datos por id
             ednombre = (EditText) findViewById(R.id.ednombre);
             ednombre.setText(etnombre_user_entrada);
 
@@ -79,19 +82,22 @@ public class ActualizarEstudiantes extends AppCompatActivity {
             femenino = (RadioButton) findViewById(R.id.rbfem);
             masculino = (RadioButton) findViewById(R.id.rbmas);
 
-            if(etgenero_user_entrada.toUpperCase().equals("MASCULINO")) {
+            if (etgenero_user_entrada.toUpperCase().equals("MASCULINO")) {
                 masculino.setChecked(true);
                 femenino.setChecked(false);
-            }else{
+            } else {
                 masculino.setChecked(false);
                 femenino.setChecked(true);
             }
         }
     }
 
-    public void editarUsuario(View view){
-        OperacionesCRUD instancia = new OperacionesCRUD(this, "BDPROGRAMA",null, 2);
+    public void editarUsuario(View view) {
+        //instancia a la clase operacionescrud
+        OperacionesCRUD instancia = new OperacionesCRUD(this, "BDPROGRAMA", null, 2);
+        //seteamos el objeto clave y valor en cada elemento del formulario
         ContentValues datosNuevosUsuario = new ContentValues();
+
         datosNuevosUsuario.put("nombre", ednombre.getText().toString());
         datosNuevosUsuario.put("apePaterno", edapellidoP.getText().toString());
         datosNuevosUsuario.put("apeMaterno", edapellidoM.getText().toString());
@@ -99,34 +105,39 @@ public class ActualizarEstudiantes extends AppCompatActivity {
         datosNuevosUsuario.put("edad", ededad.getText().toString());
         datosNuevosUsuario.put("direccion", eddireccion.getText().toString());
 
-        if(masculino.isChecked())
+        if (masculino.isChecked())
             datosNuevosUsuario.put("genero", masculino.getText().toString());
-        if(femenino.isChecked())
+        if (femenino.isChecked())
             datosNuevosUsuario.put("genero", femenino.getText().toString());
 
         datosNuevosUsuario.put("telefono", edtelefono.getText().toString());
 
-        String codicion = "id_usuario = ?";
-        String valores[] = {id_user_entrada+""};
+        //modificaremos el registro por id_usuario elegido desde la lista
+        String condicion = "id_usuario = ?";
+        String valores[] = {id_user_entrada + ""};
         int cantidad_actualizados = 0;
+        //actualiza los datos del usuario segun la condicion y valores
+        //devuelve la cantidad de registros modificados
         cantidad_actualizados = instancia.actualizarRegistro(datosNuevosUsuario,
-                codicion,valores, Estudiante.Esquema.TABLE_NAME);
+                condicion, valores, Estudiante.Esquema.TABLE_NAME);
 
-        if(cantidad_actualizados > 0){
+        if (cantidad_actualizados > 0) {
             Toast.makeText(this, "Usuario actualizado", Toast.LENGTH_LONG).show();
-        }else{
+        } else {
             Toast.makeText(this, "Error actualizando usuario", Toast.LENGTH_LONG).show();
         }
     }
-    public void volver (View view){
+
+    public void volver(View view) {
         Intent i = new Intent(this, listaestudiantesactivity.class);
         startActivity(i);
 
     }
-    public void asignatura (View view){
+
+    public void asignatura(View view) {
         Intent i = new Intent(this, AsignaturaES.class);
         startActivity(i);
 
-    }
 
+    }
 }

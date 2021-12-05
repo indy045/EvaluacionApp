@@ -26,9 +26,9 @@ public class AsignaturaES extends AppCompatActivity {
         etdescripcion = findViewById(R.id.etdescripcion);
     }
     public void insertAsig(View view) {
-
+        //instancia a la clase operacionescrud y entregamos los parametros de entrada
         OperacionesCRUD instancia = new OperacionesCRUD(this, "BDPROGRAMA", null, 2);
-
+        //utilizamos el metodo contentvalues para ingresar los datos por clave y valor
         ContentValues datosAsignatura = new ContentValues();
         datosAsignatura.put(Asignatura.Esquema.CODIGO, etcodigo.getText().toString());
         datosAsignatura.put(Asignatura.Esquema.DESCRIPCION, etdescripcion.getText().toString());

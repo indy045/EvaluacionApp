@@ -30,12 +30,13 @@ public class AdaptadorEstudiante extends RecyclerView.Adapter<AdaptadorEstudiant
 
         @NonNull
         @Override
+        //se crean las vistas sin personalizar
         public EstudianteHolder onCreateViewHolder (@NonNull ViewGroup parent,int viewType){
             View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_estudiantes, parent, false);
             EstudianteHolder holder = new EstudianteHolder(item);
             return holder;
         }
-
+    //asocia el asignaturaholder con los datos. para personlizar la tarjeta
         @Override
         public void onBindViewHolder (@NonNull EstudianteHolder holder,int position){
 
@@ -53,25 +54,25 @@ public class AdaptadorEstudiante extends RecyclerView.Adapter<AdaptadorEstudiant
             holder.email.setText(item.getEmail());
             holder.detalle.setId(item.getId_usuario());
 
-            //boton eliminar
+            //seteamos un listener  al eliminar para cuando se haga click
             holder.eliminar.setId(item.getId_usuario());
 
             holder.eliminar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String condicion = "id_usuario=?";
-                    String valores[] = {""+item.getId_usuario()};
+                    String condicion = "id_usuario=?"; //se borraran los datos del id_usuario q elija
+                    String valores[] = {""+item.getId_usuario()};//damos el id del item seleccionado
                     int cant_regs_eliminados=0;
-
+                    //instanciamos la clase operacionescrud
                     OperacionesCRUD instancia = new OperacionesCRUD(view.getContext(),"BDPROGRAMA", null,2);
-
+                    //borramos los registros pasando los valores de la tablaUsu
                     cant_regs_eliminados = instancia.borrarRegistro(Estudiante.Esquema.TABLE_NAME,condicion,valores);
 
-                    if(cant_regs_eliminados>0){
+                    if(cant_regs_eliminados>0){//si cantidad de registro es > 0 pasamos el mensaje
                         Toast.makeText(view.getContext(), "Usuario eliminado", Toast.LENGTH_SHORT).show();
                         AdaptadorEstudiante.this.estudianteDesplegar.remove(holder.getAdapterPosition());
                         AdaptadorEstudiante.this.notifyDataSetChanged();
-                    }else{
+                    }else{//sino error
                         Toast.makeText(view.getContext(), "Error eliminado usuario", Toast.LENGTH_SHORT).show();
                     }
 
@@ -79,23 +80,24 @@ public class AdaptadorEstudiante extends RecyclerView.Adapter<AdaptadorEstudiant
             });
 
             holder.editar.setId(item.getId_usuario());
+            //seteamos listener para boton editar
             holder.editar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent editarUsuario = new Intent(view.getContext(), ActualizarEstudiantes.class);
+                    //creamos el intent para que nos lleve a la clase edicion
+                    Intent editarEstudiante = new Intent(view.getContext(), ActualizarEstudiantes.class);
 
-                    editarUsuario.putExtra("id", item.getId_usuario());
-                    editarUsuario.putExtra("nombre",item.getNombre().toString());
-                    editarUsuario.putExtra("apePaterno",item.getApePaterno().toString());
-                    editarUsuario.putExtra("apeMaterno",item.getApeMaterno().toString());
-                    editarUsuario.putExtra("email",item.getEmail().toString());
-                    editarUsuario.putExtra("edad",item.getEdad().toString());
-                    editarUsuario.putExtra("direccion",item.getDireccion().toString());
-                    editarUsuario.putExtra("telefono",item.getTelefono().toString());
-                    editarUsuario.putExtra("genero",item.getGenero().toString());
-
-                    view.getContext().startActivity(editarUsuario);
-
+                    editarEstudiante.putExtra("id", item.getId_usuario());
+                    editarEstudiante.putExtra("nombre", item.getNombre());
+                    editarEstudiante.putExtra("apePaterno",item.getApePaterno().toString());
+                    editarEstudiante.putExtra("apeMaterno",item.getApeMaterno().toString());
+                    editarEstudiante.putExtra("email",item.getEmail().toString());
+                    editarEstudiante.putExtra("edad",item.getEdad().toString());
+                    editarEstudiante.putExtra("direccion",item.getDireccion().toString());
+                    editarEstudiante.putExtra("telefono",item.getTelefono().toString());
+                    editarEstudiante.putExtra("genero",item.getGenero().toString());
+                    //iniciamos la actividad
+                    view.getContext().startActivity(editarEstudiante);
                 }
             });
 
@@ -111,12 +113,13 @@ public class AdaptadorEstudiante extends RecyclerView.Adapter<AdaptadorEstudiant
                 }
             });
         }
-
+    //se obtiene el numero de elementos
         @Override
         public int getItemCount () {
             return estudianteDesplegar.size();
         }
 
+    //indicamos todos los elementos que queremos personalizar
         public class EstudianteHolder extends RecyclerView.ViewHolder {
             public ImageView avatar;
             public TextView nombre;
@@ -125,6 +128,7 @@ public class AdaptadorEstudiante extends RecyclerView.Adapter<AdaptadorEstudiant
             public ImageButton detalle;
             public ImageButton editar;
 
+        //conectamos la parte logica con la parte grafica
             public EstudianteHolder(@NonNull View itemView) {
                 super(itemView);
 

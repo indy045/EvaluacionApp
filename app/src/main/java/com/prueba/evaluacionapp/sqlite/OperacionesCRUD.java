@@ -14,20 +14,22 @@ import com.prueba.evaluacionapp.sqlite.esquema.EstudianteAsignatura;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//extendemos para uso de base de datos
 public class OperacionesCRUD extends SQLiteOpenHelper {
+    //creamos el constructor de la clase
     public OperacionesCRUD(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
-
+    //se crean las tablas
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        //base de datos se ejecuta la query y creamos las tablas
         sqLiteDatabase.execSQL(Estudiante.Esquema.CREAR_TABLA_USUARIO);
         sqLiteDatabase.execSQL(Asignatura.Esquema.CREA_TABLA_ASIGNATURA);
         sqLiteDatabase.execSQL(EstudianteAsignatura.Esquema.CREA_TABLA_USER_ASIGNATURA);
 
     }
-
+    //si hay una nueva version se borran las tablas y se vuelven a crear
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         sqLiteDatabase.execSQL(EstudianteAsignatura.Esquema.BORRAR_TABLA_USUARIO_ASIGNATURA);
@@ -36,13 +38,14 @@ public class OperacionesCRUD extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
 
     }
-
+    //inserta los datos en la tabla //contenido generico //contentvalues objeto q se le pueden setear valores como claves y valor
     public long insertarTabla(ContentValues columnas_valores_insertar, String nombre_tabla) {
 
         long id_reg_insertado = 0;
+        //manejo de excepciones // obtiene la base de datos actual
         try {
             SQLiteDatabase baseDatos = this.getWritableDatabase();
-
+            //ingresamos los parametros de la tabla(nombre de la columna y el valor a insertar)
             id_reg_insertado = baseDatos.insert(nombre_tabla, null, columnas_valores_insertar);
 
         } catch (Exception e) {
@@ -53,6 +56,7 @@ public class OperacionesCRUD extends SQLiteOpenHelper {
         return id_reg_insertado;
     }
 
+    //obtiene los datos de las tablas. selecciona registro de cualquier tabla con objeto
     public List<ContentValues> obtenerDatos(String columnasObtener[], String columnasFiltro,
                                             String valoresFiltro[], String nomTabla) {
         Cursor registroret = null;
@@ -88,11 +92,13 @@ public class OperacionesCRUD extends SQLiteOpenHelper {
         return ListaRegistro;
     }
 
-    //borrar registro
+    //borrar registro ingresamos los parametros nombre de la tabla, la condicion y los valores a borrar
     public int borrarRegistro(String nombre_tabla, String condicion, String[] val_condicion) {
         int registro_eliminados = 0;
         try {
+            //obtenemos la base de datos
             SQLiteDatabase db = this.getWritableDatabase();
+            //borramos la tabla segun los parametros y devuelve la cantidad de registros borrados
             registro_eliminados = db.delete(nombre_tabla, condicion, val_condicion);
         } catch (Exception e) {
             System.out.println("Error metodo borrar : " + e.getMessage());

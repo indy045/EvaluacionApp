@@ -4,48 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.AsignaturaMain">
+    tools:context=".activity.CalificacionES">
 
     <Button
         android:id="@+id/btnasig"
-        android:layout_width="198dp"
+        android:layout_width="171dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="223dp"
         android:layout_marginTop="44dp"
-        android:onClick="agregarasignatura"
-        android:text="Agregar Asignatura" />
+        android:text="Agregar Calificación" />
 
     <TextView
         android:id="@+id/tvusuarios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Asignaturas"
+        android:text="Calificacion de la Asignatura"
         android:textAlignment="center"
         android:textSize="24sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-
-        android:layout_below="@+id/bntagusu"
-        android:layout_marginTop="100dp" />
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="149dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="23dp"
-        android:layout_toEndOf="@+id/btnasig"
-        android:onClick="calificacion"
-        android:text="Calificacion" />
+        android:layout_height="612dp"
+        android:layout_below="@+id/btnasig"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="-3dp" />
 
 
 </RelativeLayout>
